@@ -11,7 +11,7 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
         python = pkgs.python312;
-        pythonEnv = python.withPackages (ps: [ ps.boto3 ps.pytest ps.setuptools ]);
+        pythonEnv = python.withPackages (ps: [ ps.boto3 ps.pytest ps.setuptools ps.tiktoken ]);
       in {
         devShells.default = pkgs.mkShell {
           packages = [ pythonEnv ];

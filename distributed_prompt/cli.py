@@ -10,12 +10,19 @@ from distributed_prompt.shard import ShardIndex
 
 
 def cmd_ingest(args: argparse.Namespace) -> None:
+    import tiktoken
+
     path = args.file
     output = args.output
     shard_size = args.shard_size
     print(f"Ingesting {path} → {output} (shard_size={shard_size:,})")
     index = ingest_file(path, output, shard_size)
-    print(f"Done: {index.num_shards} shards, {index.total_length:,} characters")
+
+    enc = tiktoken.get_encoding("cl100k_base")
+    with open(path, "r", encoding="utf-8") as f:
+        num_tokens = len(enc.encode(f.read()))
+
+    print(f"Done: {index.num_shards} shards, {index.total_length:,} characters, {num_tokens:,} tokens")
 
 
 def cmd_slice(args: argparse.Namespace) -> None:
