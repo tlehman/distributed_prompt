@@ -16,5 +16,5 @@ jobs:
       - uses: astral-sh/setup-uv@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - run: uv pip install --system -e ".[s3]" pytest pytest-cov
-      - run: pytest tests/ -v --cov=distributed_prompt --cov-report=term-missing
+      - run: uv sync --extra s3
+      - run: uv run pytest tests/ -v --cov=distributed_prompt --cov-report=term-missing
