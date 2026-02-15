@@ -1,4 +1,4 @@
-# DistributedPrompt (for Scaling up [RLMs](https://github.com/alexzhang13/rlm?tab=readme-ov-file#recursive-language-models-rlms))
+# DistributedPrompt (for scaling up [RLMs](https://github.com/alexzhang13/rlm?tab=readme-ov-file#recursive-language-models-rlms))
 
 <p align="center">
   <a href="https://github.com/tlehman/distributed_prompt/actions/workflows/style.yml">
