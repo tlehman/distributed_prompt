@@ -1,7 +1,5 @@
 """Tests for the ingestion pipeline."""
 
-from pathlib import Path
-
 from distributed_prompt import FileBackend, ShardIndex, ingest_file, ingest_string
 
 

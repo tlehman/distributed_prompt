@@ -27,7 +27,7 @@ def ingest_file(
     num_shards = max(1, math.ceil(total_length / shard_size))
     shards: list[ShardMeta] = []
 
-    with open(path, "r", encoding="utf-8") as f:
+    with open(path, encoding="utf-8") as f:
         for i in range(num_shards):
             chunk = f.read(shard_size)
             if not chunk:
@@ -36,12 +36,14 @@ def ingest_file(
             end = start + len(chunk)
             shard_path = output_dir / f"{i:04d}.txt"
             shard_path.write_text(chunk, encoding="utf-8")
-            shards.append(ShardMeta(
-                shard_id=i,
-                start_offset=start,
-                end_offset=end,
-                byte_length=len(chunk),
-            ))
+            shards.append(
+                ShardMeta(
+                    shard_id=i,
+                    start_offset=start,
+                    end_offset=end,
+                    byte_length=len(chunk),
+                )
+            )
 
     actual_length = shards[-1].end_offset if shards else 0
     index = ShardIndex(
@@ -74,12 +76,14 @@ def ingest_string(
         chunk = data[start:end]
         shard_path = output_dir / f"{i:04d}.txt"
         shard_path.write_text(chunk, encoding="utf-8")
-        shards.append(ShardMeta(
-            shard_id=i,
-            start_offset=start,
-            end_offset=end,
-            byte_length=len(chunk),
-        ))
+        shards.append(
+            ShardMeta(
+                shard_id=i,
+                start_offset=start,
+                end_offset=end,
+                byte_length=len(chunk),
+            )
+        )
 
     index = ShardIndex(
         total_length=total_length,

@@ -38,7 +38,9 @@ class DistributedPrompt:
             start, stop, step = key.indices(len(self))
             if step != 1:
                 # Fall back to character-by-character for non-unit steps.
-                return "".join(self._backend.fetch_range(i, i + 1) for i in range(start, stop, step))
+                return "".join(
+                    self._backend.fetch_range(i, i + 1) for i in range(start, stop, step)
+                )
             return self._backend.fetch_range(start, stop)
         raise TypeError(f"indices must be integers or slices, not {type(key).__name__}")
 

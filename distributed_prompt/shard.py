@@ -77,12 +77,14 @@ class ShardIndex:
         for i in range(num_shards):
             start = i * shard_size
             end = min(start + shard_size, total_length)
-            shards.append(ShardMeta(
-                shard_id=i,
-                start_offset=start,
-                end_offset=end,
-                byte_length=end - start,
-            ))
+            shards.append(
+                ShardMeta(
+                    shard_id=i,
+                    start_offset=start,
+                    end_offset=end,
+                    byte_length=end - start,
+                )
+            )
         return cls(
             total_length=total_length,
             shard_size=shard_size,

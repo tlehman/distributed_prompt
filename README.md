@@ -1,4 +1,13 @@
-# distributed_prompt
+# DistributedPrompt (for Scaling up [RLMs](https://github.com/alexzhang13/rlm?tab=readme-ov-file#recursive-language-models-rlms))
+
+<p align="center">
+  <a href="https://github.com/tlehman/distributed_prompt/actions/workflows/style.yml">
+    <img src="https://github.com/tlehman/distributed_prompt/actions/workflows/style.yml/badge.svg" alt="Style" />
+  </a>
+  <a href="https://github.com/tlehman/distributed_prompt/actions/workflows/test.yml">
+    <img src="https://github.com/tlehman/distributed_prompt/actions/workflows/test.yml/badge.svg" alt="Test" />
+  </a>
+</p>
 
 Horizontally scalable prompts for Recursive Language Models (RLMs).
 
@@ -11,14 +20,15 @@ holding them in memory.
 ## Quick start
 
 ```bash
-nix develop          # Python 3.12, pytest, boto3
+uv sync --all-groups    # installs Python 3.12, dev & test deps
+uv tool install -e .    # installs the dprompt CLI on your PATH
 ```
 
 ### Ingest a file
 
 ```bash
-dprompt ingest ../mega_prompt.md --output ./shards/ --shard-size 10_000_000
-dprompt info ./shards/
+uv run dprompt ingest ../mega_prompt.md --output ./shards/ --shard-size 10_000_000
+uv run dprompt info ./shards/
 ```
 
 ### Use from Python / REPL
@@ -79,8 +89,7 @@ effectively free.
 ## Running tests
 
 ```bash
-nix develop
-python3 -m pytest tests/ -v
+uv run pytest tests/ -v
 ```
 
 ## References

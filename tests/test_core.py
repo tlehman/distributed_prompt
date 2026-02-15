@@ -49,7 +49,6 @@ def test_getitem_out_of_range(prompt):
 def test_str_short():
     """Short prompts are returned in full."""
     import tempfile
-    from pathlib import Path
 
     with tempfile.TemporaryDirectory() as td:
         data = "hello world"

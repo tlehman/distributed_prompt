@@ -19,10 +19,12 @@ def cmd_ingest(args: argparse.Namespace) -> None:
     index = ingest_file(path, output, shard_size)
 
     enc = tiktoken.get_encoding("cl100k_base")
-    with open(path, "r", encoding="utf-8") as f:
+    with open(path, encoding="utf-8") as f:
         num_tokens = len(enc.encode(f.read()))
 
-    print(f"Done: {index.num_shards} shards, {index.total_length:,} characters, {num_tokens:,} tokens")
+    print(
+        f"Done: {index.num_shards} shards, {index.total_length:,} characters, {num_tokens:,} tokens"
+    )
 
 
 def cmd_slice(args: argparse.Namespace) -> None:
@@ -55,7 +57,10 @@ def main(argv: list[str] | None = None) -> None:
     p_ingest.add_argument("file", help="Path to input file")
     p_ingest.add_argument("--output", "-o", required=True, help="Output directory for shards")
     p_ingest.add_argument(
-        "--shard-size", "-s", type=int, default=DEFAULT_SHARD_SIZE,
+        "--shard-size",
+        "-s",
+        type=int,
+        default=DEFAULT_SHARD_SIZE,
         help=f"Shard size in characters (default: {DEFAULT_SHARD_SIZE:,})",
     )
 
