@@ -68,8 +68,8 @@ print(prompt[0:100])
 
 ## Integration with RLMs
 
-In Zhang & Khattab 2025's Recursive Language Model, the agent loop evaluates
-Python in a REPL where `context` is a plain string.  Replace it with:
+In Zhang & Khattab 2025's Recursive Language Models paper, the agent loop evaluates
+Python in a REPL where `prompt` is a plain string.  Replace it with:
 
 ```python
 # Before (fails for large prompts):
@@ -78,13 +78,12 @@ prompt = open("huge_file.txt").read()
 # After:
 from distributed_prompt import DistributedPrompt, FileBackend
 prompt = DistributedPrompt(FileBackend("./shards/"))
-# context[n:n+k] works identically — O(1) shard fetch
+prompt[n:n+k] # works identically — O(1) shard fetch
 ```
 
 The RLM's generated code can slice `prompt` as usual.  The `DistributedPrompt`
 object transparently fetches only the needed shards.  LM inference latency
-(seconds) dominates shard fetch latency (~100ms for S3), so this is
-effectively free.
+(seconds) dominates shard fetch latency (milliseconds) so this is effectively free.
 
 ## Running tests
 
