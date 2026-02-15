@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "distributed-prompt"
+version = "0.1.0"
+description = "Horizontally scalable prompts for Recursive Language Models"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+authors = [{ name = "Tobi Lehman" }]
+
+[project.optional-dependencies]
+s3 = ["boto3"]
+dev = ["pytest"]
+
+[project.scripts]
+distributed_prompt = "distributed_prompt.cli:main"
+dprompt = "distributed_prompt.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["distributed_prompt*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
